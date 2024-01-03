@@ -2,6 +2,8 @@
 
 This is an installation guide for a lightweight local k8s automation platform equipped with Crossplane and Argo CD.
 
+We will create a local Argo CD instance supported by a local Crossplane. We will use both of these components to provision a resource group on Azure and deploy an AKS cluster in it.
+
 Crossplane - the cloud native control plane, which, among other capabilities, will let you manage your cloud infrastructure resources as k8s objects. It interacts with the APIs of major cloud providers and lets you manage them by familiar k8s means. More info on crossplane: https://github.com/crossplane/crossplane
 
 This reference implementation was made with GitOps in mind. The README file assumes some k8s and helm know-how.
@@ -26,13 +28,10 @@ Note: Pulumi is probably an overkill for this operation, but I decided to do thi
 Make sure you have Pulumi installed and the Kubernetes cluster as your Kube context.
 
 ```
+set PULUMI_K8S_ENABLE_PATCH_FORCE="true"
 cd pulumi
 pulumi up
 ```
-
-Optional: Pass in the server.ingress.enabled to true in the index.ts file for ArgoCD to enable ingress. For the local installs we can use port forwarding or nodePort type of service.
-
-Now you can either use the ingress or Rancher Desktops port forward tool to access your argocd installation. If you port forward, you will reach the argocd server on https://localhost:(theportgivenbyrancher)
 
 Install the argocd CLI by running:
 ```
@@ -122,6 +121,11 @@ Now let us install our helm chart using Argo CD:
 ```
 kubectl apply -f manifests/argoapp.yaml
 ```
+
+Log in to Argo CD to apply the changes. The credentials for the 'admin' user can be found under the secret "argocd-initial-admin-secret" of the argocd namespace.
+
+https://127.0.0.1:8080/applications
+
 
 ### Cold-start the env
 

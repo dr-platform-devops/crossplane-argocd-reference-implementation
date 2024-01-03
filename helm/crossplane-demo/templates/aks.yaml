@@ -7,7 +7,7 @@ spec:
     resourceGroupName: crossplane-demo-rgr
     location: switzerlandnorth
     dnsPrefix: dot
-    kubernetesVersion: 1.23.8
+    kubernetesVersion: 1.28.1
     defaultNodePool:
     - maxCount: 2
       minCount: 1

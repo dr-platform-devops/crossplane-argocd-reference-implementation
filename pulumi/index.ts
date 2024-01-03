@@ -39,7 +39,7 @@ const crossplane = new k8s.helm.v3.Chart("crossplane", {
     },
     values: {
         packageCache: {
-            sizeLimit: "40Mi"
+            sizeLimit: "400Mi"
         },
     },
 },
