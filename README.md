@@ -95,13 +95,21 @@ Then, we need to get the clientId from the json file to add Azure Active Directo
 AZURE_CLIENT_ID=$(cat creds.json | grep clientId | cut -c 16-51)
 ```
 
+Set the variables we will use:
+
+```
 RW_ALL_APPS=1cda74f2-2616-4834-b122-5cb1b07f8a59
 RW_DIR_DATA=78c8a3c8-a07e-4b9e-af1b-b5ccab50a175
 AAD_GRAPH_API=00000002-0000-0000-c000-000000000000
+```
 
+Apply the changes:
+
+```
 az ad app permission add --id "${AZURE_CLIENT_ID}" --api ${AAD_GRAPH_API} --api-permissions ${RW_ALL_APPS}=Role ${RW_DIR_DATA}=Role
 az ad app permission grant --id "${AZURE_CLIENT_ID}" --api ${AAD_GRAPH_API} --expires never > /dev/null
 az ad app permission admin-consent --id "${AZURE_CLIENT_ID}"**
+```
 
 Note that some of them might not work if you are not at least an owner within your Azure account.
 
