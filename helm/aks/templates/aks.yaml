@@ -1,0 +1,18 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: KubernetesCluster
+metadata:
+  name: terrajet-aks
+spec:
+  forProvider:
+    resourceGroupName: crossplane-demo-rgr
+    location: switzerlandnorth
+    dnsPrefix: dot
+    kubernetesVersion: 1.23.8
+    defaultNodePool:
+    - maxCount: 2
+      minCount: 1
+      enableAutoScaling: true
+      vmSize: Standard_D2_v2
+      name: agent
+    identity:
+      - type: SystemAssigned

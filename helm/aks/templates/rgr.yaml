@@ -1,0 +1,10 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: crossplane-demo-rgr
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    location: switzerlandnorth
+  providerConfigRef:
+    name: default

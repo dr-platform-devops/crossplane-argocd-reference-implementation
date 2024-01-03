@@ -1,0 +1,3 @@
+name: crossplane-ref-implementation
+runtime: nodejs
+description: A minimal Kubernetes TypeScript Pulumi program
